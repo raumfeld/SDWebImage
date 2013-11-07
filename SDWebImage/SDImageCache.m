@@ -10,6 +10,7 @@
 #import "SDWebImageDecoder.h"
 #import "UIImage+MultiFormat.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "SDImageThumbnailer.h"
 #import <mach/mach.h>
 #import <mach/mach_host.h>
 
@@ -136,49 +137,69 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
     return filename;
 }
 
++ (NSString *) keyFromOriginalkey:(NSString*) originalKey forScaleSize:(int) pixelSize;
+{
+    if (pixelSize)
+    {
+        // If pixelSize==CGSizeZero, return the same key.
+        return originalKey;
+    }
+    
+    return [originalKey stringByAppendingString:[NSString stringWithFormat:@"%d",pixelSize]];
+}
+
 #pragma mark ImageCache
 
-- (void)storeImage:(UIImage *)image imageData:(NSData *)imageData forKey:(NSString *)key toDisk:(BOOL)toDisk
+- (void)storeImage:(UIImage *)image imageData:(NSData *)imageData forKey:(NSString *)key toMemory:(BOOL)toMemory toDisk:(BOOL)toDisk
 {
     if (!image || !key)
     {
         return;
     }
-
-    [self.memCache setObject:image forKey:key cost:image.size.height * image.size.width * image.scale];
-
+    
+    if (toMemory)
+    {
+        [self.memCache setObject:image forKey:key cost:image.size.height * image.size.width * image.scale];
+    }
+    
     if (toDisk)
     {
         dispatch_async(self.ioQueue, ^
-        {
-            NSData *data = imageData;
-
-            if (!data)
-            {
-                if (image)
-                {
+                       {
+                           NSData *data = imageData;
+                           
+                           if (!data)
+                           {
+                               if (image)
+                               {
 #if TARGET_OS_IPHONE
-                    data = UIImagePNGRepresentation(image);
+                                   data = UIImagePNGRepresentation(image);
 #else
-                    data = [NSBitmapImageRep representationOfImageRepsInArray:image.representations usingType: NSJPEGFileType properties:nil];
+                                   data = [NSBitmapImageRep representationOfImageRepsInArray:image.representations usingType: NSJPEGFileType properties:nil];
 #endif
-                }
-            }
-
-            if (data)
-            {
-                // Can't use defaultManager another thread
-                NSFileManager *fileManager = NSFileManager.new;
-
-                if (![fileManager fileExistsAtPath:_diskCachePath])
-                {
-                    [fileManager createDirectoryAtPath:_diskCachePath withIntermediateDirectories:YES attributes:nil error:NULL];
-                }
-
-                [fileManager createFileAtPath:[self defaultCachePathForKey:key] contents:data attributes:nil];
-            }
-        });
+                               }
+                           }
+                           
+                           if (data)
+                           {
+                               // Can't use defaultManager another thread
+                               NSFileManager *fileManager = NSFileManager.new;
+                               
+                               if (![fileManager fileExistsAtPath:_diskCachePath])
+                               {
+                                   [fileManager createDirectoryAtPath:_diskCachePath withIntermediateDirectories:YES attributes:nil error:NULL];
+                               }
+                               
+                               [fileManager createFileAtPath:[self defaultCachePathForKey:key] contents:data attributes:nil];
+                           }
+                       });
     }
+
+}
+
+- (void)storeImage:(UIImage *)image imageData:(NSData *)imageData forKey:(NSString *)key toDisk:(BOOL)toDisk
+{
+    [self storeImage:image imageData:imageData forKey:key toMemory:YES toDisk:toDisk];
 }
 
 - (void)storeImage:(UIImage *)image forKey:(NSString *)key
@@ -269,50 +290,138 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
     return SDScaledImageForKey(key, image);
 }
 
-- (NSOperation *)queryDiskCacheForKey:(NSString *)key done:(void (^)(UIImage *image, SDImageCacheType cacheType))doneBlock
+- (NSOperation *)queryDiskCacheForKey:(NSString *)key scaledtoSize:(int)pixelSize done:(void (^)(UIImage *image, SDImageCacheType cacheType))doneBlock
 {
     NSOperation *operation = NSOperation.new;
     
     if (!doneBlock) return nil;
-
+    
     if (!key)
     {
         doneBlock(nil, SDImageCacheTypeNone);
         return nil;
     }
-
-    // First check the in-memory cache...
-    UIImage *image = [self imageFromMemoryCacheForKey:key];
-    if (image)
+    
+    // Check the memory
+    // If we are looking for a scaled version of the original image, we need to do more stuff.
+    if (pixelSize)
     {
-        doneBlock(image, SDImageCacheTypeMemory);
-        return nil;
-    }
-
-    dispatch_async(self.ioQueue, ^
-    {
-        if (operation.isCancelled)
+        NSString *keyForScaled = [SDImageCache keyFromOriginalkey:key forScaleSize:pixelSize];
+        UIImage *image = [self imageFromMemoryCacheForKey: keyForScaled];
+        if (image)
         {
-            return;
+            // Scaled image already exists in the memory cache. Return it.
+            doneBlock(image, SDImageCacheTypeMemory);
+            return nil;
         }
         
-        @autoreleasepool
+        // Try to get the original image, scale it down, save it to the the cache and return it.
+        image = [self imageFromMemoryCacheForKey: key];
+        if (image)
         {
-            UIImage *diskImage = [self diskImageForKey:key];
-            if (diskImage)
-            {
-                CGFloat cost = diskImage.size.height * diskImage.size.width * diskImage.scale;
-                [self.memCache setObject:diskImage forKey:key cost:cost];
-            }
-
-            dispatch_main_sync_safe(^
-            {
-                doneBlock(diskImage, SDImageCacheTypeDisk);
-            });
+            // Scale image, save it to the cache are return it via the done block.
+            dispatch_async(self.ioQueue, ^
+                           {
+                               if (operation.isCancelled)
+                               {
+                                   return;
+                               }
+                               
+                               @autoreleasepool
+                               {
+                                   // Scale the image.
+                                   UIImage *scaledImage = [SDImageThumbnailer thumbnailWithImage:image thumbnailsize:pixelSize];
+                                   
+                                   dispatch_main_sync_safe(^
+                                                           {
+                                                               // Store it.
+                                                               if (scaledImage)
+                                                               {
+                                                                   [self storeImage:scaledImage forKey:keyForScaled toDisk:YES];
+                                                                   doneBlock(scaledImage, SDImageCacheTypeDisk);
+                                                               }
+                                                           });
+                               }
+                           });
+            
+            return operation;
         }
-    });
+    }
+    else
+    {
+        UIImage *image = [self imageFromMemoryCacheForKey: key];
+        if (image)
+        {
+            doneBlock(image, SDImageCacheTypeMemory);
+            return nil;
+        }
+    }
+    
+    // Check the disk
+    dispatch_async(self.ioQueue, ^
+                   {
+                       if (operation.isCancelled)
+                       {
+                           return;
+                       }
+                       
+                       @autoreleasepool
+                       {
+                           BOOL needsStoring = NO;
+                           UIImage *image;
+                           NSString *keyForScaled;
+                           if (pixelSize)
+                           {
+                               // Try to get the scaled image.
+                               keyForScaled = [SDImageCache keyFromOriginalkey:key forScaleSize:pixelSize];
+
+                               image = [self diskImageForKey:keyForScaled];
+                               if (image)
+                               {
+                                   // Store it only to memory.
+                                   CGFloat cost = image.size.height * image.size.width * image.scale;
+                                   [self.memCache setObject:image forKey:key cost:cost];
+                               }
+                               else
+                               {
+                                   // try to get the original image and scale it.
+                                   UIImage *originalImage = [self diskImageForKey: key];
+                                   if (originalImage)
+                                   {
+                                       image = [SDImageThumbnailer thumbnailWithImage:originalImage thumbnailsize:pixelSize];
+                                       needsStoring = YES;
+                                   }
+                               }
+                           }
+                           else
+                           {
+                               // No scaling, send the disk image if it exists.
+                               image = [self diskImageForKey:key];
+                               if (image)
+                               {
+                                   CGFloat cost = image.size.height * image.size.width * image.scale;
+                                   [self.memCache setObject:image forKey:key cost:cost];
+                               }
+                           }
+                           
+                           dispatch_main_sync_safe(^
+                                                   {
+                                                       if (needsStoring)
+                                                       {
+                                                           [self storeImage:image forKey:keyForScaled toDisk:YES];
+                                                       }
+                                                       doneBlock(image, SDImageCacheTypeDisk);
+                                                   });
+                       }
+                   });
     
     return operation;
+
+}
+
+- (NSOperation *)queryDiskCacheForKey:(NSString *)key done:(void (^)(UIImage *image, SDImageCacheType cacheType))doneBlock
+{
+    return [self queryDiskCacheForKey:key scaledtoSize:0 done:doneBlock];
 }
 
 - (void)removeImageForKey:(NSString *)key

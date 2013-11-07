@@ -144,24 +144,57 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * Downloads the image at the given URL if not present in cache or return the cached version otherwise.
  *
  * @param url The URL to the image
+ * @param pixelSize An int used to scale the image to a width of pixelSize and a height of pixelSize. 
+                    Scaling is done before the image is cached and returned. In case a downlaod is made,
+                    both the original image and the scaled image are cached on disk. On memory, only the returned
+                    image is cached. If pixelSize is equal to 0, no scaling will be made.
  * @param options A mask to specify options to use for this request
  * @param progressBlock A block called while image is downloading
  * @param completedBlock A block called when operation has been completed.
  *
  *   This parameter is required.
- * 
+ *
  *   This block has no return value and takes the requested UIImage as first parameter.
  *   In case of error the image parameter is nil and the second parameter may contain an NSError.
  *
  *   The third parameter is an `SDImageCacheType` enum indicating if the image was retrived from the local cache
  *   or from the memory cache or from the network.
  *
- *   The last parameter is set to NO when the SDWebImageProgressiveDownload option is used and the image is 
+ *   The last parameter is set to NO when the SDWebImageProgressiveDownload option is used and the image is
  *   downloading. This block is thus called repetidly with a partial image. When image is fully downloaded, the
  *   block is called a last time with the full image and the last parameter set to YES.
  *
  * @return Returns a cancellable NSOperation
  */
+- (id<SDWebImageOperation>)downloadWithURL:(NSURL *)url
+                      byScalingImageToSize:(int) pixelSize
+                                   options:(SDWebImageOptions)options
+                                  progress:(SDWebImageDownloaderProgressBlock)progressBlock
+                                 completed:(SDWebImageCompletedWithFinishedBlock)completedBlock;
+
+/**
+ * Downloads the image at the given URL if not present in cache or return the cached version otherwise.
+ *
+ * @param url The URL to the image
+ * @param options A mask to specify options to use for this request
+ * @param progressBlock A block called while image is downloading
+ * @param completedBlock A block called when operation has been completed.
+ *
+ *   This parameter is required.
+ *
+ *   This block has no return value and takes the requested UIImage as first parameter.
+ *   In case of error the image parameter is nil and the second parameter may contain an NSError.
+ *
+ *   The third parameter is an `SDImageCacheType` enum indicating if the image was retrived from the local cache
+ *   or from the memory cache or from the network.
+ *
+ *   The last parameter is set to NO when the SDWebImageProgressiveDownload option is used and the image is
+ *   downloading. This block is thus called repetidly with a partial image. When image is fully downloaded, the
+ *   block is called a last time with the full image and the last parameter set to YES.
+ *
+ * @return Returns a cancellable NSOperation
+ */
+
 - (id<SDWebImageOperation>)downloadWithURL:(NSURL *)url
                                    options:(SDWebImageOptions)options
                                   progress:(SDWebImageDownloaderProgressBlock)progressBlock

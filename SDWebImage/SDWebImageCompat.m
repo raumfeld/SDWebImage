@@ -7,6 +7,7 @@
 //
 
 #import "SDWebImageCompat.h"
+#import <ImageIO/ImageIO.h>
 
 #if !__has_feature(objc_arc)
 #error SDWebImage is ARC only. Either turn on ARC for the project or use -fobjc-arc flag
@@ -45,4 +46,52 @@ inline UIImage *SDScaledImageForKey(NSString *key, UIImage *image)
         }
         return image;
     }
+}
+
+inline CGImageRef SDCreateThumbnailImageFromData (NSData * data, int imageSize)
+{
+    CGImageRef        myThumbnailImage = NULL;
+    CGImageSourceRef  myImageSource;
+    CFDictionaryRef   myOptions = NULL;
+    CFStringRef       myKeys[3];
+    CFTypeRef         myValues[3];
+    CFNumberRef       thumbnailSize;
+    
+    // Create an image source from NSData; no options.
+    myImageSource = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+    // Make sure the image source exists before continuing.
+    if (myImageSource == NULL)
+    {
+        fprintf(stderr, "Image source is NULL.");
+        return  NULL;
+    }
+    
+    // Package the integer as a  CFNumber object. Using CFTypes allows you
+    // to more easily create the options dictionary later.
+    thumbnailSize = CFNumberCreate(NULL, kCFNumberIntType, &imageSize);
+    
+    // Set up the thumbnail options.
+    myKeys[0] = kCGImageSourceCreateThumbnailWithTransform;
+    myValues[0] = (CFTypeRef)kCFBooleanTrue;
+    myKeys[1] = kCGImageSourceCreateThumbnailFromImageIfAbsent;
+    myValues[1] = (CFTypeRef)kCFBooleanTrue;
+    myKeys[2] = kCGImageSourceThumbnailMaxPixelSize;
+    myValues[2] = (CFTypeRef)thumbnailSize;
+    
+    myOptions = CFDictionaryCreate(NULL, (const void **) myKeys,
+                                   (const void **) myValues, 3,
+                                   &kCFTypeDictionaryKeyCallBacks,
+                                   & kCFTypeDictionaryValueCallBacks);
+    
+    // Create the thumbnail image using the specified options.
+    myThumbnailImage = CGImageSourceCreateThumbnailAtIndex(myImageSource,
+                                                           0,
+                                                           myOptions);
+    // Release the options dictionary and the image source
+    // when you no longer need them.
+    CFRelease(thumbnailSize);
+    CFRelease(myOptions);
+    CFRelease(myImageSource);
+    
+    return myThumbnailImage;
 }

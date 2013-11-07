@@ -50,6 +50,14 @@ typedef enum SDImageCacheType SDImageCacheType;
 + (SDImageCache *)sharedImageCache;
 
 /**
+ * Returns the key for a scaled image by appending the pixelSize to the key
+ *
+ * @param originalKey The key for the original image
+ * @param pixelSize The width pixel size and height pixel size for the desired scaled image
+ */
++ (NSString *) keyFromOriginalkey:(NSString*) originalKey forScaleSize:(int) pixelSize;
+
+/**
  * Init a new cache store with a specific namespace
  *
  * @param ns The namespace to use for this cache store
@@ -91,13 +99,28 @@ typedef enum SDImageCacheType SDImageCacheType;
  * @param key The unique image cache key, usually it's image absolute URL
  * @param toDisk Store the image to disk cache if YES
  */
-- (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSString *)key toDisk:(BOOL)toDisk;
+- (void)storeImage:(UIImage *)image imageData:(NSData *)imageData forKey:(NSString *)key toDisk:(BOOL)toDisk;
+
+/**
+ * Store an image into memory and optionally disk cache at the given key.
+ *
+ * @param image The image to store
+ * @param data The image data as returned by the server, this representation will be used for disk storage
+ *             instead of converting the given image object into a storable/compressed image format in order
+ *             to save quality and CPU
+ * @param key The unique image cache key, usually it's image absolute URL
+ * @param toDisk Store the image to disk cache if YES
+ * @param toMemory Store the image to memory if YES
+ */
+- (void)storeImage:(UIImage *)image imageData:(NSData *)imageData forKey:(NSString *)key toMemory:(BOOL)toMemory toDisk:(BOOL)toDisk;
 
 /**
  * Query the disk cache asynchronously.
  *
  * @param key The unique key used to store the wanted image
+ * @param pixelSize The width and height of the image after scaling in pixels or 0 if you want the original image.
  */
+- (NSOperation *)queryDiskCacheForKey:(NSString *)key scaledtoSize:(int)pixelSize done:(void (^)(UIImage *image, SDImageCacheType cacheType))doneBlock;
 - (NSOperation *)queryDiskCacheForKey:(NSString *)key done:(void (^)(UIImage *image, SDImageCacheType cacheType))doneBlock;
 
 /**

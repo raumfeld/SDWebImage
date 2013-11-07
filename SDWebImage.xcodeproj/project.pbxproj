@@ -183,6 +183,15 @@
 		53EDFCFE17625F5F00698166 /* filters.c in Sources */ = {isa = PBXBuildFile; fileRef = 53EDFCFA17625F5F00698166 /* filters.c */; };
 		53EDFD0217625F7900698166 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EDFCFF17625F7900698166 /* thread.h */; };
 		53EDFD0417625F7900698166 /* thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 53EDFD0017625F7900698166 /* thread.c */; };
+		9EA2AF5C182B74280091E962 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA2AF5B182B74280091E962 /* ImageIO.framework */; };
+		9EA2AF5D182B742E0091E962 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA2AF5B182B74280091E962 /* ImageIO.framework */; };
+		9EA2AF5E182B74330091E962 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA2AF5B182B74280091E962 /* ImageIO.framework */; };
+		9EA2AF79182BD2D00091E962 /* SDImageThumbnailer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */; };
+		9EA2AF7A182BD2D00091E962 /* SDImageThumbnailer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */; };
+		9EA2AF7B182BD2D00091E962 /* SDImageThumbnailer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */; };
+		9EA2AF7C182BD2D00091E962 /* SDImageThumbnailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */; };
+		9EA2AF7D182BD2D00091E962 /* SDImageThumbnailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */; };
+		9EA2AF7E182BD2D00091E962 /* SDImageThumbnailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */; };
 		A18A6CC7172DC28500419892 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = A18A6CC5172DC28500419892 /* UIImage+GIF.h */; };
 		A18A6CC8172DC28500419892 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = A18A6CC5172DC28500419892 /* UIImage+GIF.h */; };
 		A18A6CC9172DC28500419892 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A6CC6172DC28500419892 /* UIImage+GIF.m */; };
@@ -275,6 +284,9 @@
 		53EDFD0017625F7900698166 /* thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = thread.c; path = Vendors/libwebp/src/utils/thread.c; sourceTree = "<group>"; };
 		53FB893F14D35D1A0020B787 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		53FB894814D35E9E0020B787 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9EA2AF5B182B74280091E962 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageThumbnailer.h; sourceTree = "<group>"; };
+		9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageThumbnailer.m; sourceTree = "<group>"; };
 		A18A6CC5172DC28500419892 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		A18A6CC6172DC28500419892 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		A18A6CCB172DC33A00419892 /* NSData+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GIF.h"; sourceTree = "<group>"; };
@@ -286,6 +298,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EA2AF5E182B74330091E962 /* ImageIO.framework in Frameworks */,
 				531041CD157EAFA400BBABC3 /* UIKit.framework in Frameworks */,
 				531041CE157EAFA400BBABC3 /* Foundation.framework in Frameworks */,
 				531041CF157EAFA400BBABC3 /* CoreGraphics.framework in Frameworks */,
@@ -296,6 +309,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EA2AF5C182B74280091E962 /* ImageIO.framework in Frameworks */,
 				53761312155AD0D5005750A4 /* UIKit.framework in Frameworks */,
 				53761313155AD0D5005750A4 /* Foundation.framework in Frameworks */,
 				53761314155AD0D5005750A4 /* CoreGraphics.framework in Frameworks */,
@@ -306,6 +320,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EA2AF5D182B742E0091E962 /* ImageIO.framework in Frameworks */,
 				537D959C17ECC1FE0097C263 /* UIKit.framework in Frameworks */,
 				537D959D17ECC1FE0097C263 /* Foundation.framework in Frameworks */,
 				537D959E17ECC1FE0097C263 /* CoreGraphics.framework in Frameworks */,
@@ -338,6 +353,7 @@
 		53922D71148C55820056699D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9EA2AF5B182B74280091E962 /* ImageIO.framework */,
 				53EDFBE417625A2800698166 /* WebP */,
 				53FB893F14D35D1A0020B787 /* CoreGraphics.framework */,
 				53922D72148C55820056699D /* Foundation.framework */,
@@ -410,6 +426,8 @@
 				53922D8A148C56230056699D /* SDWebImageDecoder.m */,
 				53922D91148C56230056699D /* SDWebImagePrefetcher.h */,
 				53922D92148C56230056699D /* SDWebImagePrefetcher.m */,
+				9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */,
+				9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -522,6 +540,7 @@
 				53EDFCF617625F4100698166 /* utils.h in Headers */,
 				53EDFCFC17625F5F00698166 /* filters.h in Headers */,
 				53EDFD0217625F7900698166 /* thread.h in Headers */,
+				9EA2AF7B182BD2D00091E962 /* SDImageThumbnailer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +550,7 @@
 			files = (
 				53761316155AD0D5005750A4 /* SDImageCache.h in Headers */,
 				53761318155AD0D5005750A4 /* SDWebImageCompat.h in Headers */,
+				9EA2AF79182BD2D00091E962 /* SDImageThumbnailer.h in Headers */,
 				53761319155AD0D5005750A4 /* SDWebImageDecoder.h in Headers */,
 				5376131A155AD0D5005750A4 /* SDWebImageDownloader.h in Headers */,
 				5376131C155AD0D5005750A4 /* SDWebImageManager.h in Headers */,
@@ -569,6 +589,7 @@
 				537D95B117ECC1FE0097C263 /* huffman.h in Headers */,
 				537D95B217ECC1FE0097C263 /* quant_levels_dec.h in Headers */,
 				537D95B317ECC1FE0097C263 /* dsp.h in Headers */,
+				9EA2AF7A182BD2D00091E962 /* SDImageThumbnailer.h in Headers */,
 				537D95B417ECC1FE0097C263 /* bit_reader.h in Headers */,
 				537D95B517ECC1FE0097C263 /* color_cache.h in Headers */,
 				537D95B617ECC1FE0097C263 /* lossless.h in Headers */,
@@ -727,6 +748,7 @@
 				530E49ED16464C84002868E7 /* SDWebImageDownloaderOperation.m in Sources */,
 				A18A6CCA172DC28500419892 /* UIImage+GIF.m in Sources */,
 				A18A6CD0172DC33A00419892 /* NSData+GIF.m in Sources */,
+				9EA2AF7E182BD2D00091E962 /* SDImageThumbnailer.m in Sources */,
 				53EDFB8D17623F7C00698166 /* UIImage+MultiFormat.m in Sources */,
 				53EDFB961762547D00698166 /* UIImage+WebP.m in Sources */,
 				53EDFC9517625BE300698166 /* webp.c in Sources */,
@@ -767,6 +789,7 @@
 				5376130C155AD0D5005750A4 /* SDWebImageManager.m in Sources */,
 				5376130D155AD0D5005750A4 /* SDWebImagePrefetcher.m in Sources */,
 				5376130E155AD0D5005750A4 /* UIButton+WebCache.m in Sources */,
+				9EA2AF7C182BD2D00091E962 /* SDImageThumbnailer.m in Sources */,
 				5376130F155AD0D5005750A4 /* UIImageView+WebCache.m in Sources */,
 				530E49EC16464C84002868E7 /* SDWebImageDownloaderOperation.m in Sources */,
 				53406750167780C40042B59E /* SDWebImageCompat.m in Sources */,
@@ -791,6 +814,7 @@
 				537D957D17ECC1FE0097C263 /* SDWebImageCompat.m in Sources */,
 				537D957E17ECC1FE0097C263 /* UIImage+GIF.m in Sources */,
 				537D957F17ECC1FE0097C263 /* NSData+GIF.m in Sources */,
+				9EA2AF7D182BD2D00091E962 /* SDImageThumbnailer.m in Sources */,
 				537D958017ECC1FE0097C263 /* UIImage+MultiFormat.m in Sources */,
 				537D958117ECC1FE0097C263 /* UIImage+WebP.m in Sources */,
 				537D958217ECC1FE0097C263 /* webp.c in Sources */,
