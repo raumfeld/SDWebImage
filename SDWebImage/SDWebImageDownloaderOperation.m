@@ -161,6 +161,11 @@
     [self willChangeValueForKey:@"isFinished"];
     _finished = finished;
     [self didChangeValueForKey:@"isFinished"];
+    
+    //"completionBlock" is different from "completedBlock".
+    // Completion block should be called when finished is set to YES.
+    if (finished && self.completionBlock)
+        self.completionBlock();
 }
 
 - (void)setExecuting:(BOOL)executing
@@ -299,14 +304,14 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:SDWebImageDownloadStopNotification object:nil];
 
-    SDWebImageDownloaderCompletedBlock completionBlock = self.completedBlock;
+    SDWebImageDownloaderCompletedBlock completeBlock = self.completedBlock;
 
-    if (completionBlock)
+    if (completeBlock)
     {
         if (self.options & SDWebImageDownloaderIgnoreCachedResponse && responseFromCached)
         {
-            completionBlock(nil, nil, nil, YES);
-            self.completionBlock = nil;
+            completeBlock(nil, nil, nil, YES);
+            self.completedBlock = nil;
             [self done];
         }
         else
@@ -323,13 +328,13 @@
             
             if (CGSizeEqualToSize(image.size, CGSizeZero))
             {
-                completionBlock(nil, nil, [NSError errorWithDomain:@"SDWebImageErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Downloaded image has 0 pixels"}], YES);
+                completeBlock(nil, nil, [NSError errorWithDomain:@"SDWebImageErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Downloaded image has 0 pixels"}], YES);
             }
             else
             {
-                completionBlock(image, self.imageData, nil, YES);
+                completeBlock(image, self.imageData, nil, YES);
             }
-            self.completionBlock = nil;
+            self.completedBlock = nil;
             [self done];
         }
     }

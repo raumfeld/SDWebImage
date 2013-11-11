@@ -8,6 +8,7 @@
 
 #import "SDWebImageDownloader.h"
 #import "SDWebImageDownloaderOperation.h"
+#import "LIFOOperationQueue.h"
 #import <ImageIO/ImageIO.h>
 
 NSString *const SDWebImageDownloadStartNotification = @"SDWebImageDownloadStartNotification";
@@ -18,8 +19,8 @@ static NSString *const kCompletedCallbackKey = @"completed";
 
 @interface SDWebImageDownloader ()
 
-@property (strong, nonatomic) NSOperationQueue *downloadQueue;
-@property (weak, nonatomic) NSOperation *lastAddedOperation;
+@property (strong, nonatomic) LIFOOperationQueue *downloadQueue;
+@property (strong, nonatomic) NSMutableDictionary *operationsDict;
 @property (strong, nonatomic) NSMutableDictionary *URLCallbacks;
 @property (strong, nonatomic) NSMutableDictionary *HTTPHeaders;
 // This queue is used to serialize the handling of the network responses of all the download operation in a single queue
@@ -66,9 +67,8 @@ static NSString *const kCompletedCallbackKey = @"completed";
 {
     if ((self = [super init]))
     {
-        _executionOrder = SDWebImageDownloaderFIFOExecutionOrder;
-        _downloadQueue = NSOperationQueue.new;
-        _downloadQueue.maxConcurrentOperationCount = 2;
+        _downloadQueue = [[LIFOOperationQueue alloc] initWithMaxConcurrentOperationCount:2];
+        _operationsDict = NSMutableDictionary.new;
         _URLCallbacks = NSMutableDictionary.new;
         _HTTPHeaders = [NSMutableDictionary dictionaryWithObject:@"image/webp,image/*;q=0.8" forKey:@"Accept"];
         _barrierQueue = dispatch_queue_create("com.hackemist.SDWebImageDownloaderBarrierQueue", DISPATCH_QUEUE_CONCURRENT);
@@ -153,13 +153,9 @@ static NSString *const kCompletedCallbackKey = @"completed";
             SDWebImageDownloader *sself = wself;
             [sself removeCallbacksForURL:url];
         }];
+        
+        [wself.operationsDict setObject:operation forKey:url];
         [wself.downloadQueue addOperation:operation];
-        if (wself.executionOrder == SDWebImageDownloaderLIFOExecutionOrder)
-        {
-            // Emulate LIFO execution order by systematically adding new operations as last operation's dependency
-            [wself.lastAddedOperation addDependency:operation];
-            wself.lastAddedOperation = operation;
-        }
     }];
 
     return operation;
@@ -198,6 +194,12 @@ static NSString *const kCompletedCallbackKey = @"completed";
         {
             createCallback();
         }
+        else
+        {
+            // Reprioritize the operation.
+            // LIFOOperationQueue handles this in the addOperation method.
+            [self.downloadQueue addOperation:[self.operationsDict objectForKey:url]];
+        }
     });
 }
 
@@ -216,6 +218,7 @@ static NSString *const kCompletedCallbackKey = @"completed";
     dispatch_barrier_async(self.barrierQueue, ^
     {
         [self.URLCallbacks removeObjectForKey:url];
+        [self.operationsDict removeObjectForKey:url];
     });
 }
 

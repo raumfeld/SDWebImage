@@ -120,7 +120,7 @@
     }
     NSString *key = [self cacheKeyForURL:url];
     
-    operation.cacheOperation = [self.imageCache queryDiskCacheForKey:key done:^(UIImage *image, SDImageCacheType cacheType)
+    operation.cacheOperation = [self.imageCache queryDiskCacheForKey:key scaledtoSize:pixelSize done:^(UIImage *image, SDImageCacheType cacheType)
                                 {
                                     if (operation.isCancelled)
                                     {
