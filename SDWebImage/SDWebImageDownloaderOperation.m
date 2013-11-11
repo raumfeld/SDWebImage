@@ -15,7 +15,6 @@
 @interface SDWebImageDownloaderOperation () <NSURLConnectionDataDelegate>
 
 @property (copy, nonatomic) SDWebImageDownloaderProgressBlock progressBlock;
-@property (copy, nonatomic) SDWebImageDownloaderCompletedBlock completedBlock;
 @property (copy, nonatomic) SDWebImageNoParamsBlock cancelBlock;
 
 @property (assign, nonatomic, getter = isExecuting) BOOL executing;
@@ -180,6 +179,11 @@
     [self willChangeValueForKey:@"isFinished"];
     _finished = finished;
     [self didChangeValueForKey:@"isFinished"];
+    
+    //"completionBlock" is different from "completedBlock".
+    // Completion block should be called when finished is set to YES.
+    if (finished && self.completionBlock)
+        self.completionBlock();
 }
 
 - (void)setExecuting:(BOOL)executing {
@@ -326,7 +330,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
-    SDWebImageDownloaderCompletedBlock completionBlock = self.completedBlock;
+    SDWebImageDownloaderCompletedBlock completeBlock = self.completedBlock;
     @synchronized(self) {
         CFRunLoopStop(CFRunLoopGetCurrent());
         self.thread = nil;
@@ -338,10 +342,10 @@
         responseFromCached = NO;
     }
     
-    if (completionBlock)
+    if (completeBlock)
     {
         if (self.options & SDWebImageDownloaderIgnoreCachedResponse && responseFromCached) {
-            completionBlock(nil, nil, nil, YES);
+            completeBlock(nil, nil, nil, YES);
         }
         else {
             UIImage *image = [UIImage sd_imageWithData:self.imageData];
@@ -353,14 +357,15 @@
                 image = [UIImage decodedImageWithImage:image];
             }
             if (CGSizeEqualToSize(image.size, CGSizeZero)) {
-                completionBlock(nil, nil, [NSError errorWithDomain:@"SDWebImageErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Downloaded image has 0 pixels"}], YES);
+                completeBlock(nil, nil, [NSError errorWithDomain:@"SDWebImageErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Downloaded image has 0 pixels"}], YES);
             }
-            else {
-                completionBlock(image, self.imageData, nil, YES);
+            else
+            {
+                completeBlock(image, self.imageData, nil, YES);
             }
         }
     }
-    self.completionBlock = nil;
+    self.completedBlock = nil;
     [self done];
 }
 

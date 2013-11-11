@@ -107,6 +107,12 @@
 		5D5B9145188EE8DD006D06BD /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B9141188EE8DD006D06BD /* NSData+ImageContentType.m */; };
 		5D5B9146188EE8DD006D06BD /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B9141188EE8DD006D06BD /* NSData+ImageContentType.m */; };
 		5D5B9147188EE8DD006D06BD /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B9141188EE8DD006D06BD /* NSData+ImageContentType.m */; };
+		9E59C70B1830DD62001220FB /* LIFOOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E59C7071830DD62001220FB /* LIFOOperationQueue.h */; };
+		9E59C70C1830DD62001220FB /* LIFOOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E59C7071830DD62001220FB /* LIFOOperationQueue.h */; };
+		9E59C70D1830DD62001220FB /* LIFOOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E59C7071830DD62001220FB /* LIFOOperationQueue.h */; };
+		9E59C70E1830DD62001220FB /* LIFOOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E59C7081830DD62001220FB /* LIFOOperationQueue.m */; };
+		9E59C70F1830DD62001220FB /* LIFOOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E59C7081830DD62001220FB /* LIFOOperationQueue.m */; };
+		9E59C7101830DD62001220FB /* LIFOOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E59C7081830DD62001220FB /* LIFOOperationQueue.m */; };
 		A18A6CC7172DC28500419892 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = A18A6CC5172DC28500419892 /* UIImage+GIF.h */; };
 		A18A6CC8172DC28500419892 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = A18A6CC5172DC28500419892 /* UIImage+GIF.h */; };
 		A18A6CC9172DC28500419892 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A6CC6172DC28500419892 /* UIImage+GIF.m */; };
@@ -245,6 +251,11 @@
 		53FB894814D35E9E0020B787 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5D5B9140188EE8DD006D06BD /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		5D5B9141188EE8DD006D06BD /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
+		9E59C7061830DD62001220FB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		9E59C7071830DD62001220FB /* LIFOOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFOOperationQueue.h; sourceTree = "<group>"; };
+		9E59C7081830DD62001220FB /* LIFOOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFOOperationQueue.m; sourceTree = "<group>"; };
+		9E59C7091830DD62001220FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9E59C70A1830DD62001220FB /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		A18A6CC5172DC28500419892 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		A18A6CC6172DC28500419892 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		AB615301192DA24600A2D8E9 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
@@ -455,6 +466,7 @@
 		53922DAC148C56DD0056699D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9E59C7051830DD62001220FB /* LIFOOperationQueue */,
 				53922D8E148C56230056699D /* SDWebImageManager.h */,
 				53922D8F148C56230056699D /* SDWebImageManager.m */,
 				53922D89148C56230056699D /* SDWebImageDecoder.h */,
@@ -588,6 +600,18 @@
 			path = dec;
 			sourceTree = "<group>";
 		};
+		9E59C7051830DD62001220FB /* LIFOOperationQueue */ = {
+			isa = PBXGroup;
+			children = (
+				9E59C7061830DD62001220FB /* LICENSE */,
+				9E59C7071830DD62001220FB /* LIFOOperationQueue.h */,
+				9E59C7081830DD62001220FB /* LIFOOperationQueue.m */,
+				9E59C7091830DD62001220FB /* README.md */,
+				9E59C70A1830DD62001220FB /* readme.txt */,
+			);
+			path = LIFOOperationQueue;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -605,6 +629,7 @@
 				531041DB157EAFA400BBABC3 /* UIImageView+WebCache.h in Headers */,
 				531041DC157EAFA400BBABC3 /* MKAnnotationView+WebCache.h in Headers */,
 				530E49E916464C26002868E7 /* SDWebImageOperation.h in Headers */,
+				9E59C70D1830DD62001220FB /* LIFOOperationQueue.h in Headers */,
 				530E49EB16464C7F002868E7 /* SDWebImageDownloaderOperation.h in Headers */,
 				A18A6CC8172DC28500419892 /* UIImage+GIF.h in Headers */,
 				53EDFB8B17623F7C00698166 /* UIImage+MultiFormat.h in Headers */,
@@ -633,6 +658,7 @@
 				ABBE71A718C43B4D00B75E91 /* UIImageView+HighlightedWebCache.h in Headers */,
 				AB615303192DA24600A2D8E9 /* UIView+WebCacheOperation.h in Headers */,
 				A18A6CC7172DC28500419892 /* UIImage+GIF.h in Headers */,
+				9E59C70B1830DD62001220FB /* LIFOOperationQueue.h in Headers */,
 				53EDFB8A17623F7C00698166 /* UIImage+MultiFormat.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -674,6 +700,7 @@
 				DA577D161998E60B007367ED /* yuv_tables_sse2.h in Headers */,
 				DA577D4E1998E60B007367ED /* decode.h in Headers */,
 				ABBE71A918C43B5800B75E91 /* UIImageView+HighlightedWebCache.h in Headers */,
+				9E59C70C1830DD62001220FB /* LIFOOperationQueue.h in Headers */,
 				AB615304192DA24600A2D8E9 /* UIView+WebCacheOperation.h in Headers */,
 				DA577D031998E60B007367ED /* dsp.h in Headers */,
 				DA577D6C1998E6B2007367ED /* alphai.h in Headers */,
@@ -841,6 +868,7 @@
 				AB615308192DA24600A2D8E9 /* UIView+WebCacheOperation.m in Sources */,
 				ABBE71AC18C43B6000B75E91 /* UIImageView+HighlightedWebCache.m in Sources */,
 				DAFAA6C219485CAA00581B9E /* SDWebImageCompat.m in Sources */,
+				9E59C7101830DD62001220FB /* LIFOOperationQueue.m in Sources */,
 				5D5B9147188EE8DD006D06BD /* NSData+ImageContentType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -852,6 +880,7 @@
 				53761309155AD0D5005750A4 /* SDImageCache.m in Sources */,
 				5376130A155AD0D5005750A4 /* SDWebImageDecoder.m in Sources */,
 				5376130B155AD0D5005750A4 /* SDWebImageDownloader.m in Sources */,
+				9E59C70E1830DD62001220FB /* LIFOOperationQueue.m in Sources */,
 				5376130C155AD0D5005750A4 /* SDWebImageManager.m in Sources */,
 				5376130D155AD0D5005750A4 /* SDWebImagePrefetcher.m in Sources */,
 				5376130E155AD0D5005750A4 /* UIButton+WebCache.m in Sources */,
@@ -929,6 +958,7 @@
 				DA577D341998E60B007367ED /* bit_reader.c in Sources */,
 				ABBE71AB18C43B6000B75E91 /* UIImageView+HighlightedWebCache.m in Sources */,
 				DA577D6F1998E6B2007367ED /* frame.c in Sources */,
+				9E59C70F1830DD62001220FB /* LIFOOperationQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
