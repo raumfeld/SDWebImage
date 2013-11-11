@@ -35,6 +35,7 @@
  * The SDWebImageDownloaderOptions for the receiver.
  */
 @property (assign, nonatomic, readonly) SDWebImageDownloaderOptions options;
+@property (copy, nonatomic) SDWebImageDownloaderCompletedBlock completedBlock;
 
 /**
  *  Initializes a `SDWebImageDownloaderOperation` object

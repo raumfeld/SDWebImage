@@ -18,7 +18,6 @@
 }
 
 @property (copy, nonatomic) SDWebImageDownloaderProgressBlock progressBlock;
-@property (copy, nonatomic) SDWebImageDownloaderCompletedBlock completedBlock;
 @property (copy, nonatomic) void (^cancelBlock)();
 
 @property (assign, nonatomic, getter = isExecuting) BOOL executing;
@@ -179,6 +178,11 @@
     [self willChangeValueForKey:@"isFinished"];
     _finished = finished;
     [self didChangeValueForKey:@"isFinished"];
+    
+    //"completionBlock" is different from "completedBlock".
+    // Completion block should be called when finished is set to YES.
+    if (finished && self.completionBlock)
+        self.completionBlock();
 }
 
 - (BOOL)isFinished
@@ -340,16 +344,18 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:SDWebImageDownloadStopNotification object:nil];
 
-    SDWebImageDownloaderCompletedBlock completionBlock = self.completedBlock;
-    
+    SDWebImageDownloaderCompletedBlock completeBlock = self.completedBlock;
+
     if (![[NSURLCache sharedURLCache] cachedResponseForRequest:_request]) {
         responseFromCached = NO;
     }
     
-    if (completionBlock) {
-        if (self.options & SDWebImageDownloaderIgnoreCachedResponse && responseFromCached) {
-            completionBlock(nil, nil, nil, YES);
-            self.completionBlock = nil;
+    if (completeBlock)
+    {
+        if (self.options & SDWebImageDownloaderIgnoreCachedResponse && responseFromCached)
+        {
+            completeBlock(nil, nil, nil, YES);
+            self.completedBlock = nil;
             [self done];
         }
         else {
@@ -363,14 +369,16 @@
             {
                 image = [UIImage decodedImageWithImage:image];
             }
-
-            if (CGSizeEqualToSize(image.size, CGSizeZero)) {
-                completionBlock(nil, nil, [NSError errorWithDomain:@"SDWebImageErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : @"Downloaded image has 0 pixels"}], YES);
+            
+            if (CGSizeEqualToSize(image.size, CGSizeZero))
+            {
+                completeBlock(nil, nil, [NSError errorWithDomain:@"SDWebImageErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Downloaded image has 0 pixels"}], YES);
             }
-            else {
-                completionBlock(image, self.imageData, nil, YES);
+            else
+            {
+                completeBlock(image, self.imageData, nil, YES);
             }
-            self.completionBlock = nil;
+            self.completedBlock = nil;
             [self done];
         }
     }
