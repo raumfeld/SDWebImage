@@ -139,9 +139,9 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
 
 + (NSString *) keyFromOriginalkey:(NSString*) originalKey forScaleSize:(int) pixelSize;
 {
-    if (pixelSize)
+    if (pixelSize == 0)
     {
-        // If pixelSize==CGSizeZero, return the same key.
+        // If pixelSize==0, return the same key.
         return originalKey;
     }
     
