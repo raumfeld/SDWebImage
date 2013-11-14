@@ -14,7 +14,6 @@
 @interface SDWebImageDownloaderOperation ()
 
 @property (copy, nonatomic) SDWebImageDownloaderProgressBlock progressBlock;
-@property (copy, nonatomic) SDWebImageDownloaderCompletedBlock completedBlock;
 @property (copy, nonatomic) void (^cancelBlock)();
 
 @property (assign, nonatomic, getter = isExecuting) BOOL executing;

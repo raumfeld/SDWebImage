@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic, readonly) NSURLRequest *request;
 @property (assign, nonatomic, readonly) SDWebImageDownloaderOptions options;
+@property (copy, nonatomic) SDWebImageDownloaderCompletedBlock completedBlock;
 
 - (id)initWithRequest:(NSURLRequest *)request
               options:(SDWebImageDownloaderOptions)options

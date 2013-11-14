@@ -5,6 +5,7 @@
 //
 
 #import "LIFOOperationQueue.h"
+#import "SDWebImageDownloaderOperation.h"
 
 @interface LIFOOperationQueue ()
 
@@ -12,7 +13,7 @@
 @property (assign, nonatomic) dispatch_queue_t workingQueue;
 
 - (void)startNextOperation;
-- (void)startOperation:(NSOperation *)op;
+- (void)startOperation:(SDWebImageDownloaderOperation *)op;
 
 @end
 
@@ -60,7 +61,7 @@
 // Also starts operation on an open thread if possible
 //
 
-- (void)addOperation:(NSOperation *)op {
+- (void)addOperation:(SDWebImageDownloaderOperation *)op {
     @synchronized(self.operations)
     {
         if ( [self.operations containsObject:op] )
@@ -102,7 +103,7 @@
     @synchronized(self.runningOperations)
     {
         for (int i = 0; i < (int)self.runningOperations.count; i++) {
-            NSOperation *runningOp = [self.runningOperations objectAtIndex:i];
+            SDWebImageDownloaderOperation *runningOp = [self.runningOperations objectAtIndex:i];
             [runningOp cancel];
             
             [self.runningOperations removeObject:runningOp];
@@ -133,7 +134,7 @@
 //        }
 //        if ( runningOpCount < self.maxConcurrentOperationCount ) {
         if ( (int)self.runningOperations.count < self.maxConcurrentOperationCount ) {
-            NSOperation *nextOp = [self nextOperation];
+            SDWebImageDownloaderOperation *nextOp = [self nextOperation];
             if (nextOp) {
                 if ( !nextOp.isExecuting ) {
                     [self startOperation:nextOp];
@@ -150,23 +151,23 @@
 // Starts operations
 //
 
-- (void)startOperation:(NSOperation *)op  {
-    void (^completion)() = [op.completionBlock copy];
+- (void)startOperation:(SDWebImageDownloaderOperation *)op  {
+    SDWebImageDownloaderCompletedBlock completion = [op.completedBlock copy];
     
-    NSOperation *blockOp = op;
+    SDWebImageDownloaderOperation *blockOp = op;
     
-    [op setCompletionBlock:^{
-        if (completion) {
-            completion();
-        }
-
+    [op setCompletedBlock: ^(UIImage *image, NSData *data, NSError *error, BOOL finished){
         @synchronized(self.operations) {
             [self.operations removeObject:blockOp];
         }
         @synchronized(self.runningOperations) {
             [self.runningOperations removeObject:blockOp];
         }
-
+        
+        if (completion) {
+            completion(image, data, error, finished);
+        }
+        
         [self startNextOperation];
     }];
 
@@ -185,11 +186,11 @@
 // Returns next operation that is not already running
 //
 
-- (NSOperation *)nextOperation {
+- (SDWebImageDownloaderOperation *)nextOperation {
     @synchronized(self.operations)
     {
         for (int i = 0; i < (int)self.operations.count; i++) {
-            NSOperation *operation = [self.operations objectAtIndex:i];
+            SDWebImageDownloaderOperation *operation = [self.operations objectAtIndex:i];
             @synchronized(self.runningOperations)
             {
                 if ( ![self.runningOperations containsObject:operation] && !operation.isExecuting && operation.isReady ) {
