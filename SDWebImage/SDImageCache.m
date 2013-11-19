@@ -380,7 +380,7 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
                                {
                                    // Store it only to memory.
                                    CGFloat cost = image.size.height * image.size.width * image.scale;
-                                   [self.memCache setObject:image forKey:key cost:cost];
+                                   [self.memCache setObject:image forKey:keyForScaled cost:cost];
                                }
                                else
                                {
