@@ -74,10 +74,7 @@
         }
         else
             [self.operations insertObject:op atIndex:0];
-    }
-
-    @synchronized(self.runningOperations)
-    {
+        
         if ( (int)self.runningOperations.count < self.maxConcurrentOperationCount )
             [self startNextOperation];
     }
@@ -98,10 +95,11 @@
 //
 
 - (void)cancelAllOperations {
-    self.operations = [NSMutableArray array];
     
-    @synchronized(self.runningOperations)
+    @synchronized(self.operations)
     {
+        self.operations = [NSMutableArray array];
+        
         for (int i = 0; i < (int)self.runningOperations.count; i++) {
             SDWebImageDownloaderOperation *runningOp = [self.runningOperations objectAtIndex:i];
             [runningOp cancel];
@@ -121,18 +119,10 @@
 - (void)startNextOperation {
     @synchronized(self.operations)
     {
-        @synchronized(self.runningOperations)
-        {
-            if ( !self.operations.count ) {
-                return;
-            }
+        if ( !self.operations.count ) {
+            return;
         }
-//        int runningOpCount;
-//        @synchronized(self.runningOperations)
-//        {
-//            runningOpCount = (int)self.runningOperations.count;
-//        }
-//        if ( runningOpCount < self.maxConcurrentOperationCount ) {
+        
         if ( (int)self.runningOperations.count < self.maxConcurrentOperationCount ) {
             SDWebImageDownloaderOperation *nextOp = [self nextOperation];
             if (nextOp) {
@@ -159,8 +149,6 @@
     [op setCompletedBlock: ^(UIImage *image, NSData *data, NSError *error, BOOL finished){
         @synchronized(self.operations) {
             [self.operations removeObject:blockOp];
-        }
-        @synchronized(self.runningOperations) {
             [self.runningOperations removeObject:blockOp];
         }
         
@@ -171,7 +159,7 @@
         [self startNextOperation];
     }];
 
-    @synchronized(self.runningOperations) {
+    @synchronized(self.operations) {
         [self.runningOperations addObject:op];
     }
     

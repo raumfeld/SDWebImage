@@ -215,7 +215,7 @@ static NSString *const kCompletedCallbackKey = @"completed";
 
 - (void)removeCallbacksForURL:(NSURL *)url
 {
-    dispatch_barrier_async(self.barrierQueue, ^
+    dispatch_barrier_sync(self.barrierQueue, ^
     {
         [self.URLCallbacks removeObjectForKey:url];
         [self.operationsDict removeObjectForKey:url];

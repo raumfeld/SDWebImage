@@ -317,7 +317,7 @@
 
 - (id<SDWebImageOperation>)downloadWithURL:(NSURL *)url options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletedWithFinishedBlock)completedBlock
 {
-    return [self downloadWithURL:url byScalingImageToSize:nil options:options progress:progressBlock completed:completedBlock];
+    return [self downloadWithURL:url byScalingImageToSize:0 options:options progress:progressBlock completed:completedBlock];
 }
 
 - (void)cancelAll
