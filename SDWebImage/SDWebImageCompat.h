@@ -42,8 +42,6 @@
 #endif
 
 extern inline UIImage *SDScaledImageForKey(NSString *key, UIImage *image);
-extern inline CGImageRef SDCreateThumbnailImageFromData (NSData * data, int imageSize);
-
 
 #define dispatch_main_sync_safe(block)\
     if ([NSThread isMainThread])\

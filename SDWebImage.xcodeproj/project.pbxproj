@@ -183,6 +183,24 @@
 		53EDFCFE17625F5F00698166 /* filters.c in Sources */ = {isa = PBXBuildFile; fileRef = 53EDFCFA17625F5F00698166 /* filters.c */; };
 		53EDFD0217625F7900698166 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EDFCFF17625F7900698166 /* thread.h */; };
 		53EDFD0417625F7900698166 /* thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 53EDFD0017625F7900698166 /* thread.c */; };
+		9E52B551183CF057008FD27E /* UIImage+Alpha.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54B183CF057008FD27E /* UIImage+Alpha.h */; };
+		9E52B552183CF058008FD27E /* UIImage+Alpha.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54B183CF057008FD27E /* UIImage+Alpha.h */; };
+		9E52B553183CF058008FD27E /* UIImage+Alpha.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54B183CF057008FD27E /* UIImage+Alpha.h */; };
+		9E52B554183CF058008FD27E /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B54C183CF057008FD27E /* UIImage+Alpha.m */; };
+		9E52B555183CF058008FD27E /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B54C183CF057008FD27E /* UIImage+Alpha.m */; };
+		9E52B556183CF058008FD27E /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B54C183CF057008FD27E /* UIImage+Alpha.m */; };
+		9E52B557183CF058008FD27E /* UIImage+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54D183CF057008FD27E /* UIImage+Resize.h */; };
+		9E52B558183CF058008FD27E /* UIImage+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54D183CF057008FD27E /* UIImage+Resize.h */; };
+		9E52B559183CF058008FD27E /* UIImage+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54D183CF057008FD27E /* UIImage+Resize.h */; };
+		9E52B55A183CF058008FD27E /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B54E183CF057008FD27E /* UIImage+Resize.m */; };
+		9E52B55B183CF058008FD27E /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B54E183CF057008FD27E /* UIImage+Resize.m */; };
+		9E52B55C183CF058008FD27E /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B54E183CF057008FD27E /* UIImage+Resize.m */; };
+		9E52B55D183CF058008FD27E /* UIImage+RoundedCorner.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54F183CF057008FD27E /* UIImage+RoundedCorner.h */; };
+		9E52B55E183CF058008FD27E /* UIImage+RoundedCorner.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54F183CF057008FD27E /* UIImage+RoundedCorner.h */; };
+		9E52B55F183CF058008FD27E /* UIImage+RoundedCorner.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E52B54F183CF057008FD27E /* UIImage+RoundedCorner.h */; };
+		9E52B560183CF058008FD27E /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B550183CF057008FD27E /* UIImage+RoundedCorner.m */; };
+		9E52B561183CF058008FD27E /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B550183CF057008FD27E /* UIImage+RoundedCorner.m */; };
+		9E52B562183CF058008FD27E /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E52B550183CF057008FD27E /* UIImage+RoundedCorner.m */; };
 		9E59C70B1830DD62001220FB /* LIFOOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E59C7071830DD62001220FB /* LIFOOperationQueue.h */; };
 		9E59C70C1830DD62001220FB /* LIFOOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E59C7071830DD62001220FB /* LIFOOperationQueue.h */; };
 		9E59C70D1830DD62001220FB /* LIFOOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E59C7071830DD62001220FB /* LIFOOperationQueue.h */; };
@@ -192,12 +210,6 @@
 		9EA2AF5C182B74280091E962 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA2AF5B182B74280091E962 /* ImageIO.framework */; };
 		9EA2AF5D182B742E0091E962 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA2AF5B182B74280091E962 /* ImageIO.framework */; };
 		9EA2AF5E182B74330091E962 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA2AF5B182B74280091E962 /* ImageIO.framework */; };
-		9EA2AF79182BD2D00091E962 /* SDImageThumbnailer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */; };
-		9EA2AF7A182BD2D00091E962 /* SDImageThumbnailer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */; };
-		9EA2AF7B182BD2D00091E962 /* SDImageThumbnailer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */; };
-		9EA2AF7C182BD2D00091E962 /* SDImageThumbnailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */; };
-		9EA2AF7D182BD2D00091E962 /* SDImageThumbnailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */; };
-		9EA2AF7E182BD2D00091E962 /* SDImageThumbnailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */; };
 		A18A6CC7172DC28500419892 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = A18A6CC5172DC28500419892 /* UIImage+GIF.h */; };
 		A18A6CC8172DC28500419892 /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = A18A6CC5172DC28500419892 /* UIImage+GIF.h */; };
 		A18A6CC9172DC28500419892 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = A18A6CC6172DC28500419892 /* UIImage+GIF.m */; };
@@ -290,14 +302,18 @@
 		53EDFD0017625F7900698166 /* thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = thread.c; path = Vendors/libwebp/src/utils/thread.c; sourceTree = "<group>"; };
 		53FB893F14D35D1A0020B787 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		53FB894814D35E9E0020B787 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9E52B54B183CF057008FD27E /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		9E52B54C183CF057008FD27E /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		9E52B54D183CF057008FD27E /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		9E52B54E183CF057008FD27E /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		9E52B54F183CF057008FD27E /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		9E52B550183CF057008FD27E /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		9E59C7061830DD62001220FB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9E59C7071830DD62001220FB /* LIFOOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIFOOperationQueue.h; sourceTree = "<group>"; };
 		9E59C7081830DD62001220FB /* LIFOOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIFOOperationQueue.m; sourceTree = "<group>"; };
 		9E59C7091830DD62001220FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		9E59C70A1830DD62001220FB /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		9EA2AF5B182B74280091E962 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageThumbnailer.h; sourceTree = "<group>"; };
-		9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageThumbnailer.m; sourceTree = "<group>"; };
 		A18A6CC5172DC28500419892 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		A18A6CC6172DC28500419892 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		A18A6CCB172DC33A00419892 /* NSData+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GIF.h"; sourceTree = "<group>"; };
@@ -432,14 +448,13 @@
 			isa = PBXGroup;
 			children = (
 				9E59C7051830DD62001220FB /* LIFOOperationQueue */,
+				9E52B54A183CF056008FD27E /* UIImage-categories */,
 				53922D8E148C56230056699D /* SDWebImageManager.h */,
 				53922D8F148C56230056699D /* SDWebImageManager.m */,
 				53922D89148C56230056699D /* SDWebImageDecoder.h */,
 				53922D8A148C56230056699D /* SDWebImageDecoder.m */,
 				53922D91148C56230056699D /* SDWebImagePrefetcher.h */,
 				53922D92148C56230056699D /* SDWebImagePrefetcher.m */,
-				9EA2AF77182BD2D00091E962 /* SDImageThumbnailer.h */,
-				9EA2AF78182BD2D00091E962 /* SDImageThumbnailer.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -515,6 +530,19 @@
 			name = dsp;
 			sourceTree = "<group>";
 		};
+		9E52B54A183CF056008FD27E /* UIImage-categories */ = {
+			isa = PBXGroup;
+			children = (
+				9E52B54B183CF057008FD27E /* UIImage+Alpha.h */,
+				9E52B54C183CF057008FD27E /* UIImage+Alpha.m */,
+				9E52B54D183CF057008FD27E /* UIImage+Resize.h */,
+				9E52B54E183CF057008FD27E /* UIImage+Resize.m */,
+				9E52B54F183CF057008FD27E /* UIImage+RoundedCorner.h */,
+				9E52B550183CF057008FD27E /* UIImage+RoundedCorner.m */,
+			);
+			path = "UIImage-categories";
+			sourceTree = "<group>";
+		};
 		9E59C7051830DD62001220FB /* LIFOOperationQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -556,16 +584,18 @@
 				53EDFC9F17625C1100698166 /* vp8i.h in Headers */,
 				53EDFCA717625C5B00698166 /* huffman.h in Headers */,
 				53EDFCB317625CD800698166 /* quant_levels_dec.h in Headers */,
+				9E52B559183CF058008FD27E /* UIImage+Resize.h in Headers */,
 				53EDFCBA17625D1900698166 /* dsp.h in Headers */,
 				53EDFCC617625DB200698166 /* bit_reader.h in Headers */,
 				53EDFCCC17625DD700698166 /* color_cache.h in Headers */,
+				9E52B55F183CF058008FD27E /* UIImage+RoundedCorner.h in Headers */,
 				53EDFCD217625DFA00698166 /* lossless.h in Headers */,
 				53EDFCE417625EB100698166 /* yuv.h in Headers */,
 				53EDFCF017625F1D00698166 /* rescaler.h in Headers */,
 				53EDFCF617625F4100698166 /* utils.h in Headers */,
+				9E52B553183CF058008FD27E /* UIImage+Alpha.h in Headers */,
 				53EDFCFC17625F5F00698166 /* filters.h in Headers */,
 				53EDFD0217625F7900698166 /* thread.h in Headers */,
-				9EA2AF7B182BD2D00091E962 /* SDImageThumbnailer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,11 +605,13 @@
 			files = (
 				53761316155AD0D5005750A4 /* SDImageCache.h in Headers */,
 				53761318155AD0D5005750A4 /* SDWebImageCompat.h in Headers */,
-				9EA2AF79182BD2D00091E962 /* SDImageThumbnailer.h in Headers */,
 				53761319155AD0D5005750A4 /* SDWebImageDecoder.h in Headers */,
 				5376131A155AD0D5005750A4 /* SDWebImageDownloader.h in Headers */,
+				9E52B557183CF058008FD27E /* UIImage+Resize.h in Headers */,
 				5376131C155AD0D5005750A4 /* SDWebImageManager.h in Headers */,
+				9E52B55D183CF058008FD27E /* UIImage+RoundedCorner.h in Headers */,
 				5376131E155AD0D5005750A4 /* SDWebImagePrefetcher.h in Headers */,
+				9E52B551183CF057008FD27E /* UIImage+Alpha.h in Headers */,
 				5376131F155AD0D5005750A4 /* UIButton+WebCache.h in Headers */,
 				53761320155AD0D5005750A4 /* UIImageView+WebCache.h in Headers */,
 				530E49E816464C25002868E7 /* SDWebImageOperation.h in Headers */,
@@ -598,6 +630,7 @@
 				537D95A017ECC1FE0097C263 /* SDImageCache.h in Headers */,
 				537D95A117ECC1FE0097C263 /* SDWebImageCompat.h in Headers */,
 				537D95A217ECC1FE0097C263 /* SDWebImageDecoder.h in Headers */,
+				9E52B55E183CF058008FD27E /* UIImage+RoundedCorner.h in Headers */,
 				537D95A317ECC1FE0097C263 /* SDWebImageDownloader.h in Headers */,
 				537D95A417ECC1FE0097C263 /* SDWebImageManager.h in Headers */,
 				537D95A517ECC1FE0097C263 /* SDWebImagePrefetcher.h in Headers */,
@@ -608,6 +641,7 @@
 				537D95AA17ECC1FE0097C263 /* UIImage+GIF.h in Headers */,
 				537D95AB17ECC1FE0097C263 /* NSData+GIF.h in Headers */,
 				537D95AC17ECC1FE0097C263 /* UIImage+MultiFormat.h in Headers */,
+				9E52B558183CF058008FD27E /* UIImage+Resize.h in Headers */,
 				537D95AD17ECC1FE0097C263 /* UIImage+WebP.h in Headers */,
 				537D95AE17ECC1FE0097C263 /* webpi.h in Headers */,
 				537D95AF17ECC1FE0097C263 /* vp8li.h in Headers */,
@@ -616,8 +650,8 @@
 				537D95B117ECC1FE0097C263 /* huffman.h in Headers */,
 				537D95B217ECC1FE0097C263 /* quant_levels_dec.h in Headers */,
 				537D95B317ECC1FE0097C263 /* dsp.h in Headers */,
-				9EA2AF7A182BD2D00091E962 /* SDImageThumbnailer.h in Headers */,
 				537D95B417ECC1FE0097C263 /* bit_reader.h in Headers */,
+				9E52B552183CF058008FD27E /* UIImage+Alpha.h in Headers */,
 				537D95B517ECC1FE0097C263 /* color_cache.h in Headers */,
 				537D95B617ECC1FE0097C263 /* lossless.h in Headers */,
 				537D95B717ECC1FE0097C263 /* alpha_processing.h in Headers */,
@@ -775,7 +809,6 @@
 				530E49ED16464C84002868E7 /* SDWebImageDownloaderOperation.m in Sources */,
 				A18A6CCA172DC28500419892 /* UIImage+GIF.m in Sources */,
 				A18A6CD0172DC33A00419892 /* NSData+GIF.m in Sources */,
-				9EA2AF7E182BD2D00091E962 /* SDImageThumbnailer.m in Sources */,
 				53EDFB8D17623F7C00698166 /* UIImage+MultiFormat.m in Sources */,
 				53EDFB961762547D00698166 /* UIImage+WebP.m in Sources */,
 				53EDFC9517625BE300698166 /* webp.c in Sources */,
@@ -790,12 +823,14 @@
 				9E59C7101830DD62001220FB /* LIFOOperationQueue.m in Sources */,
 				53EDFCC217625D8400698166 /* cpu.c in Sources */,
 				53EDFCC817625DB200698166 /* bit_reader.c in Sources */,
+				9E52B556183CF058008FD27E /* UIImage+Alpha.m in Sources */,
 				53EDFCCE17625DD700698166 /* color_cache.c in Sources */,
 				53E481DE17C300F6003E8957 /* alpha_processing.c in Sources */,
 				53EDFCD417625DFA00698166 /* lossless.c in Sources */,
 				53EDFCD717625E1A00698166 /* tree.c in Sources */,
 				53EDFCDA17625E3000698166 /* quant.c in Sources */,
 				53EDFCDD17625E6000698166 /* buffer.c in Sources */,
+				9E52B562183CF058008FD27E /* UIImage+RoundedCorner.m in Sources */,
 				53EDFCE017625E8D00698166 /* upsampling.c in Sources */,
 				53EDFCE617625EB100698166 /* yuv.c in Sources */,
 				53EDFCE917625EC800698166 /* io.c in Sources */,
@@ -804,6 +839,7 @@
 				53EDFCF817625F4100698166 /* utils.c in Sources */,
 				53EDFCFE17625F5F00698166 /* filters.c in Sources */,
 				53EDFD0417625F7900698166 /* thread.c in Sources */,
+				9E52B55C183CF058008FD27E /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,12 +849,14 @@
 			files = (
 				53761309155AD0D5005750A4 /* SDImageCache.m in Sources */,
 				5376130A155AD0D5005750A4 /* SDWebImageDecoder.m in Sources */,
+				9E52B560183CF058008FD27E /* UIImage+RoundedCorner.m in Sources */,
 				5376130B155AD0D5005750A4 /* SDWebImageDownloader.m in Sources */,
 				9E59C70E1830DD62001220FB /* LIFOOperationQueue.m in Sources */,
 				5376130C155AD0D5005750A4 /* SDWebImageManager.m in Sources */,
 				5376130D155AD0D5005750A4 /* SDWebImagePrefetcher.m in Sources */,
 				5376130E155AD0D5005750A4 /* UIButton+WebCache.m in Sources */,
-				9EA2AF7C182BD2D00091E962 /* SDImageThumbnailer.m in Sources */,
+				9E52B554183CF058008FD27E /* UIImage+Alpha.m in Sources */,
+				9E52B55A183CF058008FD27E /* UIImage+Resize.m in Sources */,
 				5376130F155AD0D5005750A4 /* UIImageView+WebCache.m in Sources */,
 				530E49EC16464C84002868E7 /* SDWebImageDownloaderOperation.m in Sources */,
 				53406750167780C40042B59E /* SDWebImageCompat.m in Sources */,
@@ -843,7 +881,6 @@
 				537D957D17ECC1FE0097C263 /* SDWebImageCompat.m in Sources */,
 				537D957E17ECC1FE0097C263 /* UIImage+GIF.m in Sources */,
 				537D957F17ECC1FE0097C263 /* NSData+GIF.m in Sources */,
-				9EA2AF7D182BD2D00091E962 /* SDImageThumbnailer.m in Sources */,
 				537D958017ECC1FE0097C263 /* UIImage+MultiFormat.m in Sources */,
 				537D958117ECC1FE0097C263 /* UIImage+WebP.m in Sources */,
 				537D958217ECC1FE0097C263 /* webp.c in Sources */,
@@ -858,12 +895,14 @@
 				9E59C70F1830DD62001220FB /* LIFOOperationQueue.m in Sources */,
 				537D958B17ECC1FE0097C263 /* cpu.c in Sources */,
 				537D958C17ECC1FE0097C263 /* bit_reader.c in Sources */,
+				9E52B555183CF058008FD27E /* UIImage+Alpha.m in Sources */,
 				537D958D17ECC1FE0097C263 /* color_cache.c in Sources */,
 				537D958E17ECC1FE0097C263 /* alpha_processing.c in Sources */,
 				537D958F17ECC1FE0097C263 /* lossless.c in Sources */,
 				537D959017ECC1FE0097C263 /* tree.c in Sources */,
 				537D959117ECC1FE0097C263 /* quant.c in Sources */,
 				537D959217ECC1FE0097C263 /* buffer.c in Sources */,
+				9E52B561183CF058008FD27E /* UIImage+RoundedCorner.m in Sources */,
 				537D959317ECC1FE0097C263 /* upsampling.c in Sources */,
 				537D959417ECC1FE0097C263 /* yuv.c in Sources */,
 				537D959517ECC1FE0097C263 /* io.c in Sources */,
@@ -872,6 +911,7 @@
 				537D959817ECC1FE0097C263 /* utils.c in Sources */,
 				537D959917ECC1FE0097C263 /* filters.c in Sources */,
 				537D959A17ECC1FE0097C263 /* thread.c in Sources */,
+				9E52B55B183CF058008FD27E /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

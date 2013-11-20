@@ -41,6 +41,7 @@ typedef enum SDImageCacheType SDImageCacheType;
  * The maximum size of the cache, in bytes.
  */
 @property (assign, nonatomic) unsigned long long maxCacheSize;
+@property (SDDispatchQueueSetterSementics, readonly, nonatomic) dispatch_queue_t ioQueue;
 
 /**
  * Returns global shared cache instance

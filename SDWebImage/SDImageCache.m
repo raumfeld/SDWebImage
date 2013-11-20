@@ -10,7 +10,7 @@
 #import "SDWebImageDecoder.h"
 #import "UIImage+MultiFormat.h"
 #import <CommonCrypto/CommonDigest.h>
-#import "SDImageThumbnailer.h"
+#import "UIImage+Resize.h"
 #import <mach/mach.h>
 #import <mach/mach_host.h>
 
@@ -330,7 +330,7 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
                                @autoreleasepool
                                {
                                    // Scale the image.
-                                   UIImage *scaledImage = [SDImageThumbnailer thumbnailWithImage:image thumbnailsize:pixelSize];
+                                   UIImage *scaledImage = [image thumbnailImage:pixelSize transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
                                    
                                    dispatch_main_sync_safe(^
                                                            {
@@ -388,7 +388,7 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
                                    UIImage *originalImage = [self diskImageForKey: key];
                                    if (originalImage)
                                    {
-                                       image = [SDImageThumbnailer thumbnailWithImage:originalImage thumbnailsize:pixelSize];
+                                       image = [originalImage thumbnailImage:pixelSize transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
                                        needsStoring = YES;
                                    }
                                }

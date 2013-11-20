@@ -7,7 +7,7 @@
  */
 
 #import "SDWebImageManager.h"
-#import "SDImageThumbnailer.h"
+#import "UIImage+Resize.h"
 #import "UIImage+GIF.h"
 #import <objc/message.h>
 
@@ -193,13 +193,13 @@
                                                                                         else if (downloadedImage && !downloadedImage.images && [self.delegate respondsToSelector:@selector(imageManager:transformDownloadedImage:withURL:)])
                                                                                             
                                                                                         {
-                                                                                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
+                                                                                            dispatch_async(self.imageCache.ioQueue, ^
                                                                                                            {
                                                                                                                UIImage *scaledImage = nil;
                                                                                                                if (pixelSize)
                                                                                                                {
                                                                                                                    // Scale the image.
-                                                                                                                   scaledImage = [SDImageThumbnailer thumbnailWithImage:downloadedImage thumbnailsize:pixelSize];
+                                                                                                                   scaledImage = [downloadedImage thumbnailImage:pixelSize transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
                                                                                                                }
                                                                                                                
                                                                                                                UIImage *transformedImage = [self.delegate imageManager:self transformDownloadedImage:downloadedImage withURL:url];
@@ -244,9 +244,9 @@
                                                                                         {
                                                                                             if (pixelSize)
                                                                                             {
-                                                                                                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
+                                                                                                dispatch_async(self.imageCache.ioQueue, ^
                                                                                                                {
-                                                                                                                   UIImage *scaledImage = [SDImageThumbnailer thumbnailWithImage:downloadedImage thumbnailsize:pixelSize];
+                                                                                                                   UIImage *scaledImage = [downloadedImage thumbnailImage:pixelSize transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
                                                                                                                    NSString *keyForScaledImage = [SDImageCache keyFromOriginalkey:key forScaleSize:pixelSize];
                                                                                                                    
                                                                                                                    dispatch_main_sync_safe(^
