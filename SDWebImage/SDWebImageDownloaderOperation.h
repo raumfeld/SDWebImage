@@ -17,6 +17,7 @@
 @property (copy, nonatomic) SDWebImageDownloaderCompletedBlock completedBlock;
 
 - (id)initWithRequest:(NSURLRequest *)request
+               resize:(int) pointsSize
               options:(SDWebImageDownloaderOptions)options
              progress:(SDWebImageDownloaderProgressBlock)progressBlock
             completed:(SDWebImageDownloaderCompletedBlock)completedBlock

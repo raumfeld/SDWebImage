@@ -9,6 +9,7 @@
 #import "SDWebImageDownloaderOperation.h"
 #import "SDWebImageDecoder.h"
 #import "UIImage+MultiFormat.h"
+#import "UIImage+Resize.h"
 #import <ImageIO/ImageIO.h>
 
 @interface SDWebImageDownloaderOperation ()
@@ -16,6 +17,7 @@
 @property (copy, nonatomic) SDWebImageDownloaderProgressBlock progressBlock;
 @property (copy, nonatomic) void (^cancelBlock)();
 
+@property (assign, nonatomic) int pointsSize;
 @property (assign, nonatomic, getter = isExecuting) BOOL executing;
 @property (assign, nonatomic, getter = isFinished) BOOL finished;
 @property (assign, nonatomic) long long expectedSize;
@@ -34,7 +36,7 @@
     BOOL responseFromCached;
 }
 
-- (id)initWithRequest:(NSURLRequest *)request options:(SDWebImageDownloaderOptions)options progress:(void (^)(NSUInteger, long long))progressBlock completed:(void (^)(UIImage *, NSData *, NSError *, BOOL))completedBlock cancelled:(void (^)())cancelBlock
+- (id)initWithRequest:(NSURLRequest *)request resize:(int) pointsSize options:(SDWebImageDownloaderOptions)options progress:(void (^)(NSUInteger, long long))progressBlock completed:(void (^)(UIImage *, NSData *, NSError *, BOOL))completedBlock cancelled:(void (^)())cancelBlock
 {
     if ((self = [super init]))
     {
@@ -46,6 +48,7 @@
         _executing = NO;
         _finished = NO;
         _expectedSize = 0;
+        _pointsSize = pointsSize;
         responseFromCached = YES; // Initially wrong until `connection:willCacheResponse:` is called or not called
     }
     return self;
@@ -315,15 +318,17 @@
         }
         else
         {
-            
             UIImage *image = [UIImage sd_imageWithData:self.imageData];
-            
+
             image = [self scaledImageForKey:self.request.URL.absoluteString image:image];
             
             if (!image.images) // Do not force decod animated GIFs
             {
                 image = [UIImage decodedImageWithImage:image];
             }
+            
+            if (self.pointsSize)
+                image = [image thumbnailImage:self.pointsSize transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
             
             if (CGSizeEqualToSize(image.size, CGSizeZero))
             {
