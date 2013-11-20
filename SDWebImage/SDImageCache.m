@@ -152,12 +152,12 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
 
 - (void)storeImage:(UIImage *)image imageData:(NSData *)imageData forKey:(NSString *)key toMemory:(BOOL)toMemory toDisk:(BOOL)toDisk
 {
-    if (!image || !key)
+    if (!key)
     {
         return;
     }
     
-    if (toMemory)
+    if (image && toMemory)
     {
         [self.memCache setObject:image forKey:key cost:image.size.height * image.size.width * image.scale];
     }

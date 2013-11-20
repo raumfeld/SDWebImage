@@ -203,7 +203,21 @@
                             if (transformedImage && finished)
                             {
                                 NSData *dataToStore = [transformedImage isEqual:downloadedImage] ? data : nil;
-                                [self.imageCache storeImage:transformedImage imageData:dataToStore forKey:key toDisk:cacheOnDisk];
+                                if (pointsSize)
+                                {
+                                    NSString *keyForScaled = [SDImageCache keyFromOriginalkey:key forScaleSize:pointsSize];
+                                    [self.imageCache storeImage:transformedImage imageData:nil forKey:keyForScaled toDisk:cacheOnDisk];
+                                    
+                                    // Save the data of the original image to disk only if it remained.
+                                    if (dataToStore)
+                                    {
+                                        [self.imageCache storeImage:nil imageData:dataToStore forKey:key toMemory:NO toDisk:YES];
+                                    }
+                                }
+                                else
+                                {
+                                    [self.imageCache storeImage:transformedImage imageData:dataToStore forKey:key toDisk:cacheOnDisk];
+                                }
                             }
                         });
                     }
@@ -216,7 +230,21 @@
 
                         if (downloadedImage && finished)
                         {
-                            [self.imageCache storeImage:downloadedImage imageData:data forKey:key toDisk:cacheOnDisk];
+                            if (pointsSize)
+                            {
+                                NSString *keyForScaled = [SDImageCache keyFromOriginalkey:key forScaleSize:pointsSize];
+                                [self.imageCache storeImage:downloadedImage imageData:nil forKey:keyForScaled toDisk:cacheOnDisk];
+                                
+                                // Save the data of the original image to disk only if it remained.
+                                if (data)
+                                {
+                                    [self.imageCache storeImage:nil imageData:data forKey:key toMemory:NO toDisk:YES];
+                                }
+                            }
+                            else
+                            {
+                                [self.imageCache storeImage:downloadedImage imageData:data forKey:key toDisk:cacheOnDisk];
+                            }
                         }
                     }
                 }
