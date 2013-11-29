@@ -73,7 +73,7 @@
 }
 
 - (id<SDWebImageOperation>)downloadWithURL:(NSURL *)url
-                      byScalingImageToSize:(int) pointsSize
+                      byScalingImageToSize:(int) pixelSize
                                    options:(SDWebImageOptions)options
                                   progress:(SDWebImageDownloaderProgressBlock)progressBlock
                                  completed:(SDWebImageCompletedWithFinishedBlock)completedBlock
@@ -119,7 +119,7 @@
     }
     NSString *key = [self cacheKeyForURL:url];
 
-    operation.cacheOperation = [self.imageCache queryDiskCacheForKey:key scaledtoSize:pointsSize done:^(UIImage *image, SDImageCacheType cacheType)
+    operation.cacheOperation = [self.imageCache queryDiskCacheForKey:key scaledtoSize:pixelSize done:^(UIImage *image, SDImageCacheType cacheType)
     {
         if (operation.isCancelled)
         {
@@ -156,7 +156,7 @@
                 // ignore image read from NSURLCache if image if cached but force refreshing
                 downloaderOptions |= SDWebImageDownloaderIgnoreCachedResponse;
             }
-            id<SDWebImageOperation> subOperation = [self.imageDownloader downloadImageWithURL:url resizedTo:pointsSize options:downloaderOptions progress:progressBlock completed:^(UIImage *downloadedImage, NSData *data, NSError *error, BOOL finished)
+            id<SDWebImageOperation> subOperation = [self.imageDownloader downloadImageWithURL:url resizedTo:pixelSize options:downloaderOptions progress:progressBlock completed:^(UIImage *downloadedImage, NSData *data, NSError *error, BOOL finished)
             {                
                 if (weakOperation.isCancelled)
                 {
@@ -203,9 +203,9 @@
                             if (transformedImage && finished)
                             {
                                 NSData *dataToStore = [transformedImage isEqual:downloadedImage] ? data : nil;
-                                if (pointsSize)
+                                if (pixelSize)
                                 {
-                                    NSString *keyForScaled = [SDImageCache keyFromOriginalkey:key forScaleSize:pointsSize];
+                                    NSString *keyForScaled = [SDImageCache keyFromOriginalkey:key forScaleSize:pixelSize];
                                     [self.imageCache storeImage:transformedImage imageData:nil forKey:keyForScaled toDisk:cacheOnDisk];
                                     
                                     // Save the data of the original image to disk only if it remained.
@@ -230,9 +230,9 @@
 
                         if (downloadedImage && finished)
                         {
-                            if (pointsSize)
+                            if (pixelSize)
                             {
-                                NSString *keyForScaled = [SDImageCache keyFromOriginalkey:key forScaleSize:pointsSize];
+                                NSString *keyForScaled = [SDImageCache keyFromOriginalkey:key forScaleSize:pixelSize];
                                 [self.imageCache storeImage:downloadedImage imageData:nil forKey:keyForScaled toDisk:cacheOnDisk];
                                 
                                 // Save the data of the original image to disk only if it remained.

@@ -84,7 +84,7 @@ typedef void(^SDWebImageDownloaderCompletedBlock)(UIImage *image, NSData *data, 
  * @return A cancellable SDWebImageOperation
  */
 - (id<SDWebImageOperation>)downloadImageWithURL:(NSURL *)url
-                                      resizedTo:(int)pointSize
+                                      resizedTo:(int)pixelSize
                                         options:(SDWebImageDownloaderOptions)options
                                        progress:(SDWebImageDownloaderProgressBlock)progressBlock
                                       completed:(SDWebImageDownloaderCompletedBlock)completedBlock;

@@ -109,12 +109,12 @@ static NSString *const kCompletedCallbackKey = @"completed";
     return _downloadQueue.maxConcurrentOperationCount;
 }
 
-- (id<SDWebImageOperation>)downloadImageWithURL:(NSURL *)url resizedTo:(int)pointSize options:(SDWebImageDownloaderOptions)options progress:(void (^)(NSUInteger, long long))progressBlock completed:(void (^)(UIImage *, NSData *, NSError *, BOOL))completedBlock
+- (id<SDWebImageOperation>)downloadImageWithURL:(NSURL *)url resizedTo:(int)pixelSize options:(SDWebImageDownloaderOptions)options progress:(void (^)(NSUInteger, long long))progressBlock completed:(void (^)(UIImage *, NSData *, NSError *, BOOL))completedBlock
 {
     __block SDWebImageDownloaderOperation *operation;
     __weak SDWebImageDownloader *wself = self;
 
-    [self addProgressCallback:progressBlock andCompletedBlock:completedBlock forURL:url withScaleSize:pointSize createCallback:^
+    [self addProgressCallback:progressBlock andCompletedBlock:completedBlock forURL:url withScaleSize:pixelSize createCallback:^
     {
         // In order to prevent from potential duplicate caching (NSURLCache + SDImageCache) we disable the cache for image requests if told otherwise
         NSMutableURLRequest *request = [NSMutableURLRequest.alloc initWithURL:url cachePolicy:(options & SDWebImageDownloaderUseNSURLCache ? NSURLRequestUseProtocolCachePolicy : NSURLRequestReloadIgnoringLocalCacheData) timeoutInterval:15];
@@ -123,12 +123,12 @@ static NSString *const kCompletedCallbackKey = @"completed";
         request.allHTTPHeaderFields = wself.HTTPHeaders;
         
         NSString *callbackID;
-        if (pointSize)
-            callbackID = [[url absoluteString] stringByAppendingString:[NSString stringWithFormat:@"%d",pointSize]];
+        if (pixelSize)
+            callbackID = [[url absoluteString] stringByAppendingString:[NSString stringWithFormat:@"%d",pixelSize]];
         else
             callbackID = [url absoluteString];
         
-        operation = [SDWebImageDownloaderOperation.alloc initWithRequest:request resize:pointSize options:options progress:^(NSUInteger receivedSize, long long expectedSize)
+        operation = [SDWebImageDownloaderOperation.alloc initWithRequest:request resize:pixelSize options:options progress:^(NSUInteger receivedSize, long long expectedSize)
         {
             if (!wself) return;
             SDWebImageDownloader *sself = wself;
@@ -168,7 +168,7 @@ static NSString *const kCompletedCallbackKey = @"completed";
     return operation;
 }
 
-- (void)addProgressCallback:(void (^)(NSUInteger, long long))progressBlock andCompletedBlock:(void (^)(UIImage *, NSData *data, NSError *, BOOL))completedBlock forURL:(NSURL *)url withScaleSize:(int) pointsSize createCallback:(void (^)())createCallback
+- (void)addProgressCallback:(void (^)(NSUInteger, long long))progressBlock andCompletedBlock:(void (^)(UIImage *, NSData *data, NSError *, BOOL))completedBlock forURL:(NSURL *)url withScaleSize:(int) pixelSize createCallback:(void (^)())createCallback
 {
     // The URL will be used as the key to the callbacks dictionary so it cannot be nil. If it is nil immediately call the completed block with no image or data.
     if(url == nil)
@@ -181,8 +181,8 @@ static NSString *const kCompletedCallbackKey = @"completed";
     }
     
     NSString *callbackID;
-    if (pointsSize)
-        callbackID = [[url absoluteString] stringByAppendingString:[NSString stringWithFormat:@"%d",pointsSize]];
+    if (pixelSize)
+        callbackID = [[url absoluteString] stringByAppendingString:[NSString stringWithFormat:@"%d",pixelSize]];
     else
         callbackID = [url absoluteString];
     

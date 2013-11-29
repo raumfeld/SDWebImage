@@ -144,7 +144,7 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * Downloads the image at the given URL if not present in cache or return the cached version otherwise.
  *
  * @param url The URL to the image
- * @param pixelSize An int used to scale the image to a width of pointsSize and a height of pointsSize.
+ * @param pixelSize An int used to scale the image to a width of pixelSize and a height of pixelSize.
                     Scaling is done before the image is cached and returned. In case a downlaod is made,
                     both the original image and the scaled image are cached on disk. On memory, only the returned
                     image is cached. If pixelSize is equal to 0, no scaling will be made.
@@ -167,7 +167,7 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
  * @return Returns a cancellable NSOperation
  */
 - (id<SDWebImageOperation>)downloadWithURL:(NSURL *)url
-                      byScalingImageToSize:(int) pointsSize
+                      byScalingImageToSize:(int) pixelSize
                                    options:(SDWebImageOptions)options
                                   progress:(SDWebImageDownloaderProgressBlock)progressBlock
                                  completed:(SDWebImageCompletedWithFinishedBlock)completedBlock;
