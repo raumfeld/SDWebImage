@@ -14,7 +14,7 @@
 // This method ignores the image's imageOrientation setting.
 - (UIImage *)croppedImage:(CGRect)bounds {
     CGImageRef imageRef = CGImageCreateWithImageInRect([self CGImage], bounds);
-    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
+    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef scale:[[UIScreen mainScreen] scale] orientation:UIImageOrientationUp];
     CGImageRelease(imageRef);
     return croppedImage;
 }
@@ -32,8 +32,8 @@
     // Crop out any part of the image that's larger than the thumbnail size
     // The cropped rect must be centered on the resized image
     // Round the origin points so that the size isn't altered when CGRectIntegral is later invoked
-    CGRect cropRect = CGRectMake(round((resizedImage.size.width - thumbnailSize) / 2),
-                                 round((resizedImage.size.height - thumbnailSize) / 2),
+    CGRect cropRect = CGRectMake(round((resizedImage.size.width - (thumbnailSize / resizedImage.scale)) / 2),
+                                 round((resizedImage.size.height - (thumbnailSize / resizedImage.scale)) / 2),
                                  thumbnailSize,
                                  thumbnailSize);
     UIImage *croppedImage = [resizedImage croppedImage:cropRect];
@@ -126,7 +126,7 @@
     
     // Get the resized image from the context and a UIImage
     CGImageRef newImageRef = CGBitmapContextCreateImage(bitmap);
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef scale:[[UIScreen mainScreen] scale] orientation:UIImageOrientationUp];
     
     // Clean up
     CGContextRelease(bitmap);

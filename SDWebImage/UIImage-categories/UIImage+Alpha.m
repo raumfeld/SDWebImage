@@ -72,7 +72,7 @@
     // Create a mask to make the border transparent, and combine it with the image
     CGImageRef maskImageRef = [self newBorderMask:borderSize size:newRect.size];
     CGImageRef transparentBorderImageRef = CGImageCreateWithMask(borderImageRef, maskImageRef);
-    UIImage *transparentBorderImage = [UIImage imageWithCGImage:transparentBorderImageRef];
+    UIImage *transparentBorderImage = [UIImage imageWithCGImage:transparentBorderImageRef scale:[[UIScreen mainScreen] scale] orientation:UIImageOrientationUp];
     
     // Clean up
     CGContextRelease(bitmap);
