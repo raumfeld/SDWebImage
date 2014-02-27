@@ -215,7 +215,7 @@
             self.progressBlock(0, expected);
         }
 
-        self.imageData = [[NSMutableData alloc] initWithCapacity:expected];
+        self.imageData = [[NSMutableData alloc] init];
     }
     else {
         [self.connection cancel];
