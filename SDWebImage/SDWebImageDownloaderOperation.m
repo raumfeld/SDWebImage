@@ -188,14 +188,13 @@
 {
     if (![response respondsToSelector:@selector(statusCode)] || [((NSHTTPURLResponse *)response) statusCode] < 400)
     {
-        NSUInteger expected = response.expectedContentLength > 0 ? (NSUInteger)response.expectedContentLength : 0;
-        self.expectedSize = expected;
+        self.expectedSize = response.expectedContentLength > 0 ? response.expectedContentLength : 0;
         if (self.progressBlock)
         {
-            self.progressBlock(0, expected);
+            self.progressBlock(0, self.expectedSize);
         }
 
-        self.imageData = [NSMutableData.alloc initWithCapacity:expected];
+        self.imageData = [NSMutableData.alloc init];
     }
     else
     {
