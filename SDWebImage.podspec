@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'SDWebImage'
   s.version = '3.7.1'
-  s.platform = :ios, '5.0'
+  s.platform = :ios, '6.0'
   s.license = 'MIT'
   s.summary = 'Asynchronous image downloader with cache support with an UIImageView category.'
   s.homepage = 'https://github.com/rs/SDWebImage'
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Core'
 
   s.subspec 'Core' do |core|
-    core.source_files = 'SDWebImage/{NS,SD,UI}*.{h,m}'
+    core.source_files = 'SDWebImage/{NS,SD,UI}*.{h,m}', 'SDWebImage/LIFOOperationQueue/*.{h,m}'
     core.exclude_files = 'SDWebImage/UIImage+WebP.{h,m}'
   end
 
